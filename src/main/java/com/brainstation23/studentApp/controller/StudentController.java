@@ -11,12 +11,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/home")
-public class HomeController {
+@RequestMapping("/students")
+public class StudentController {
     private final StudentService service = new StudentService();
 
-    @GetMapping
-    public String home(Model model) throws SQLException {
+    @GetMapping()
+    public String showAllStudents(Model model) throws SQLException {
         List<Student> students = service.getAllStudents();
         model.addAttribute("students", students);
         return "home";
