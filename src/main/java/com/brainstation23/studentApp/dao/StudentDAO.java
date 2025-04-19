@@ -12,6 +12,7 @@ import java.util.List;
 
 public class StudentDAO {
     private static final String SELECT_ALL = "select * from students";
+    private static final String INSERT  = "insert into students (name,age,email,department) VALUES (?,?,?,?)";
 
     public List<Student> getAllStudents() throws SQLException {
         Connection connection = DbConnector.getInstance().getConnection();
@@ -35,4 +36,14 @@ public class StudentDAO {
     }
 
 
+    public void add(Student student) throws SQLException {
+        Connection connection = DbConnector.getInstance().getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(INSERT)) {
+            statement.setString(1, student.getName());
+            statement.setInt(2, student.getAge());
+            statement.setString(3, student.getEmail());
+            statement.setString(4, student.getDepartment());
+            statement.executeUpdate();
+        }
+    }
 }

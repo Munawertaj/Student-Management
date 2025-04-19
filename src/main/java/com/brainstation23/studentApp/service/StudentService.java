@@ -12,4 +12,8 @@ public class StudentService {
     public List<Student> getAllStudents() throws SQLException {
         return studentDAO.getAllStudents();
     }
+
+    public void addStudent(Student student) throws SQLException {
+        studentDAO.add(student);
+    }
 }
