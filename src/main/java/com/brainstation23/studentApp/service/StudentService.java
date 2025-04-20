@@ -16,4 +16,12 @@ public class StudentService {
     public void addStudent(Student student) throws SQLException {
         studentDAO.add(student);
     }
+
+    public void update(Student student) throws SQLException {
+        studentDAO.update(student);
+    }
+
+    public Student findById(int id) throws SQLException {
+        return studentDAO.findById(id);
+    }
 }

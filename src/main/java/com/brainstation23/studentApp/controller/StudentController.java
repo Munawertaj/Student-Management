@@ -4,10 +4,7 @@ import com.brainstation23.studentApp.model.Student;
 import com.brainstation23.studentApp.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -30,9 +27,28 @@ public class StudentController {
         return "add";
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public String addStudent(@ModelAttribute Student student) throws SQLException {
         service.addStudent(student);
         return "redirect:/students";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateStudentForm(@PathVariable int id,  Model model) throws SQLException {
+        Student student = service.findById(id);
+        model.addAttribute("student", student);
+        return "update";
+    }
+
+    @PostMapping("/update")
+    public String updateStudent(@ModelAttribute Student student) throws SQLException {
+        service.update(student);
+        return "redirect:/students";
+    }
+
+    @GetMapping("/{id}")
+    public String detail(@PathVariable int id, Model model) throws SQLException {
+        model.addAttribute("student", service.findById(id));
+        return "details";
     }
 }
