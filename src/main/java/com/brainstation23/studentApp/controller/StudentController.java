@@ -51,4 +51,10 @@ public class StudentController {
         model.addAttribute("student", service.findById(id));
         return "details";
     }
+
+    @PostMapping("/delete/{id}")
+    public String deleteStudent(@PathVariable int id) throws SQLException {
+        service.delete(id);
+        return "redirect:/students";
+    }
 }

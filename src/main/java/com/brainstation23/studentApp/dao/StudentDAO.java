@@ -15,6 +15,7 @@ public class StudentDAO {
     private static final String INSERT  = "insert into students (name,age,email,department) VALUES (?,?,?,?)";
     private static final String UPDATE  = "UPDATE students SET name=?, age=?, email=?, department=? WHERE id=?";
     private static final String SELECT_BY_ID= "SELECT * FROM students WHERE id = ?";
+    private static final String DELETE  = "DELETE FROM students WHERE id=?";
 
     public List<Student> getAllStudents() throws SQLException {
         Connection connection = DbConnector.getInstance().getConnection();
@@ -77,6 +78,14 @@ public class StudentDAO {
                         resultSet.getString("department")
                 );
             }
+        }
+    }
+
+    public void delete(int id) throws SQLException {
+        Connection connection = DbConnector.getInstance().getConnection();
+        try (PreparedStatement statement = connection.prepareStatement(DELETE)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
         }
     }
 }

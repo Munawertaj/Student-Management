@@ -24,4 +24,8 @@ public class StudentService {
     public Student findById(int id) throws SQLException {
         return studentDAO.findById(id);
     }
+
+    public void delete(int id) throws SQLException {
+        studentDAO.delete(id);
+    }
 }
